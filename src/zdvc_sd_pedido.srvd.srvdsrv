@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition Pedido'
+define service ZDVC_SD_PEDIDO {
+  expose ZDVC_C_PEDIDO  as Pedido;
+  expose ZDVC_C_PEDITEM;
+}

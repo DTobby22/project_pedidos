@@ -8,7 +8,7 @@ define view entity ZDVC_I_PEDITEM
 {
   key order_id     as OrderId,
   key item_no      as ItemNo,
-      product_name as ProductName,
+      product_name as ProductName,    
       quantity     as Quantity,
       unit_price   as UnitPrice,
       subtotal     as Subtotal,

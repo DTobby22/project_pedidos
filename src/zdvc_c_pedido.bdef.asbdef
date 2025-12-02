@@ -1,0 +1,17 @@
+projection;
+strict ( 2 );
+
+define behavior for ZDVC_C_PEDIDO alias Pedido
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Items { create; }
+}
+
+define behavior for ZDVC_C_PEDITEM alias Item
+{
+  use update;
+  use association _Pedido;
+}
