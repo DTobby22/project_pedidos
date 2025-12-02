@@ -6,7 +6,9 @@
 "ZDVC_TAB_PEDITEM"
 ],
 "ASSOCIATED":
-[],
+[
+"ZDVC_I_PEDIDO"
+],
 "BASE":
 [],
 "ANNO_REF":

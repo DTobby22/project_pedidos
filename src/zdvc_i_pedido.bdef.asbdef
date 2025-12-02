@@ -1,0 +1,52 @@
+managed implementation in class zbp_dvc_i_pedido unique;
+strict ( 2 );
+
+define behavior for ZDVC_I_PEDIDO alias Pedido
+  persistent table zdvc_tab_pedido
+  lock master
+  authorization master ( instance )
+{
+  create ( authorization : global );
+  update;
+  delete;
+
+  // Hijo composite: los items se crean a través de esta asociación
+  association _Items { create; }
+
+  // La clave no se modifica
+  field ( readonly ) OrderId;
+
+  mapping for zdvc_tab_pedido
+  {
+    OrderId     = order_id;
+    ClientId    = client_id;
+    OrderDate   = order_date;
+    TotalAmount = total_amount;
+  }
+}
+
+define behavior for ZDVC_I_PEDITEM alias Item
+  persistent table zdvc_tab_peditem
+  lock dependent by _Pedido
+  authorization dependent by _Pedido
+{
+  // OJO: aquí SOLO update, nada de create/delete
+  update;
+
+  // Claves del item no se modifican
+  field ( readonly ) OrderId;
+  field ( readonly ) ItemNo;
+
+  // Asociación TO PARENT, obligatorio en strict
+  association _Pedido;
+
+  mapping for zdvc_tab_peditem
+  {
+    OrderId     = order_id;
+    ItemNo      = item_no;
+    ProductName = product_name;
+    Quantity    = quantity;
+    UnitPrice   = unit_price;
+    Subtotal    = subtotal;
+  }
+}
